@@ -69,5 +69,22 @@ public class HamcrestTest {
         assertThat(goniec.atak().toString(), equalTo("[(1,1), (0,0), (1,3), (0,4), (3,3), (4,4), (5,5), (6,6), (7,7), (3,1), (4,0)]"));
     }
 
+    @Test
+    public void zablokowanyAtakGonca() {
+        Szachownica sz = new Szachownica(6);
+        Goniec goniec = new Goniec(2, 3, sz);
+        Goniec goniec1 = new Goniec(3, 4, sz);
+        Goniec goniec2 = new Goniec(0, 1, sz);
+        goniec.atak();
+        assertThat(goniec.atak().toString(), equalTo("[(1,2), (1,4), (0,5), (3,2), (4,1), (5,0)]"));
+    }
 
+    @Test
+    public void niezablokowanyAtakGonca() {
+        Szachownica sz = new Szachownica(10);
+        Goniec goniec = new Goniec(4, 2, sz);
+        Goniec goniec1 = new Goniec(5, 5, sz);
+        goniec.atak();
+        assertThat(goniec.atak().toString(), equalTo("[(3,1), (2,0), (3,3), (2,4), (1,5), (0,6), (5,3), (6,4), (7,5), (8,6), (9,7), (5,1), (6,0)]"));
+    }
 }

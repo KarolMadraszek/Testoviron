@@ -3,20 +3,19 @@ package junit4;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
-
 import org.example.Goniec;
 import org.example.Szachownica;
 import org.junit.Test;
 
 public class HamcrestTest {
     @Test
-    public void StworzSzachownice(){
+    public void stworzSzachownice(){
         Szachownica sz = new Szachownica(8);
         assertThat(sz.getN(), equalTo(8));
     }
 
     @Test (expected = IllegalArgumentException.class)
-    public void PustaSzachownica(){
+    public void pustaSzachownica(){
         Szachownica sz = new Szachownica(0);
     }
 
@@ -33,12 +32,12 @@ public class HamcrestTest {
         Goniec goniec = new Goniec(3, 3, sz);
     }
 
-
     @Test
     public void ruchGonca() {
         Szachownica sz = new Szachownica(8);
         Goniec goniec = new Goniec(3, 3, sz);
         goniec.ruch(4, 4);
+        assertThat(goniec.pozycja().toString(), equalTo("Goniec na polu (4, 4)"));
     }
 
     @Test (expected = IllegalArgumentException.class)
@@ -58,7 +57,7 @@ public class HamcrestTest {
 
     // atak
     @Test
-    public void AtakGonca() {
+    public void atakGonca() {
         Szachownica sz = new Szachownica(8);
         Goniec goniec = new Goniec(2, 2, sz);
         // n + 1, n + 1 +inf

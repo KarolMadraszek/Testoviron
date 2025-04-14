@@ -1,14 +1,11 @@
 package org.example;
 
-
 import java.util.ArrayList;
-
 
 public class Goniec implements IFigura{
     Szachownica szachownica;
     int posX;
     int posY;
-
 
     public Goniec(int posX, int posY, Szachownica szachownica) {
         this.szachownica = szachownica;
@@ -18,7 +15,6 @@ public class Goniec implements IFigura{
         this.posY = posY;
     }
 
-
     public ArrayList<Tuple<Integer, Integer>> atak() {
         ArrayList<Tuple<Integer, Integer>> Pos = new ArrayList<>();
         int[][] kierunki = { {-1, -1}, {-1, 1}, {1, 1}, {1, -1} };
@@ -26,7 +22,6 @@ public class Goniec implements IFigura{
         for (int[] kierunek : kierunki) {
             int i = this.posX + kierunek[0];
             int j = this.posY + kierunek[1];
-
             while (i >= 0 && i < szachownica.getN() && j >= 0 && j < szachownica.getN()) {
                 if (szachownica.wolneMiejsce(i, j)) {
                     Pos.add(new Tuple<>(i, j));
@@ -37,22 +32,20 @@ public class Goniec implements IFigura{
                 j += kierunek[1];
             }
         }
-
         return Pos;
     }
 
-
-    public void ruch(int x, int y) {
+    public String ruch(int x, int y) {
         if (x >= szachownica.getN() || y >= szachownica.getN()) throw new java.lang.IllegalArgumentException();
         System.out.println(this.atak());
         Tuple tp = new Tuple( (Integer) x, (Integer) y);
         if (!this.atak().contains(tp)) throw new java.lang.IllegalArgumentException();
         this.posX = x;
         this.posY = y;
+        return String.format("Goniec ruszył się na pole (%d, %d)", posX, posY);
     }
 
     public String pozycja() {
         return String.format("Goniec na polu (%d, %d)", posX, posY);
     }
-
 }

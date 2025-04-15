@@ -32,6 +32,14 @@ public class HamcrestTest {
         Goniec goniec = new Goniec(3, 3, sz);
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void stworzGoncaPozaMapaUj() {
+        Szachownica sz = new Szachownica(1);
+        Goniec goniec = new Goniec(-3, -3, sz);
+    }
+
+
+
     @Test
     public void ruchGonca() {
         Szachownica sz = new Szachownica(8);

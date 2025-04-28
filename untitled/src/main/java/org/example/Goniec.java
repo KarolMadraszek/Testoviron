@@ -9,8 +9,12 @@ public class Goniec implements IFigura{
 
     public Goniec(int posX, int posY, Szachownica szachownica) {
         this.szachownica = szachownica;
-        if (posX >= szachownica.getN() || posY >= szachownica.getN()) throw new java.lang.IllegalArgumentException();
-        if (posX < 0 || posY < 0 ) throw new java.lang.IllegalArgumentException();
+        if (posX > szachownica.getN() && posY > szachownica.getN()) throw new java.lang.IllegalArgumentException("Goniec poza mapą.");
+        else if( posX == szachownica.getN() || posY == szachownica.getN()) throw new
+                java.lang.IllegalArgumentException("Goniec lekko poza mapą. (Pozycje są liczone od 0 do n-1)");
+        else if (posX < 0 && posY < 0 ) throw new java.lang.IllegalArgumentException("Goniec na ujemnych polach");
+        else if (posX < 0 ) throw new java.lang.IllegalArgumentException("Goniec na ujemnym polu PosX.");
+        else if (posY < 0 ) throw new java.lang.IllegalArgumentException("Goniec na ujemnym polu PosY.");
         szachownica.miejsce[posX][posY] = (IFigura) this;
         this.posX = posX;
         this.posY = posY;
@@ -37,7 +41,7 @@ public class Goniec implements IFigura{
     }
 
     public String ruch(int x, int y) {
-        if (x >= szachownica.getN() || y >= szachownica.getN()) throw new java.lang.IllegalArgumentException();
+        //if (x >= szachownica.getN() || y >= szachownica.getN()) throw new java.lang.IllegalArgumentException("Ruch gońca poza mapę");
         System.out.println(this.atak());
         Tuple tp = new Tuple( (Integer) x, (Integer) y);
         if (!this.atak().contains(tp)) throw new java.lang.IllegalArgumentException();
